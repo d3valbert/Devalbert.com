@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "dompurify": "^2.4.3",
+    "dompurify": "^2.4.7",
     "sanitize-html": "^2.8.1"
   },
   "devDependencies": {
