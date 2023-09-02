@@ -1435,6 +1435,10 @@
         } else if (importedNode.nodeName === 'HTML') {
           body = importedNode;
         } else {
+          // Do nothing
+        }
+          // Do nothing
+        }
           // eslint-disable-next-line unicorn/prefer-dom-node-append
           body.appendChild(importedNode);
         }

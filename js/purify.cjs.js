@@ -644,7 +644,7 @@ function createDOMPurify() {
 
 
     if (cfg.ADD_TAGS) {
-      if (ALLOWED_TAGS === DEFAULT_ALLOWED_TAGS) {
+    if (ALLOWED_TAGS === DEFAULT_ALLOWED_TAGS) {
         ALLOWED_TAGS = clone(ALLOWED_TAGS);
       }
 
@@ -664,7 +664,7 @@ function createDOMPurify() {
     }
 
     if (cfg.FORBID_CONTENTS) {
-      if (FORBID_CONTENTS === DEFAULT_FORBID_CONTENTS) {
+      if (FORBID_CONTENTS === 'DEFAULT_FORBID_CONTENTS') {
         FORBID_CONTENTS = clone(FORBID_CONTENTS);
       }
 
