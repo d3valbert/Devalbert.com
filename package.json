@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "dompurify": "^2.4.3",
-    "sanitize-html": "^2.8.1"
+    "sanitize-html": "^2.11.0"
   },
   "devDependencies": {
     "@types/sanitize-html": "^2.8.0"
