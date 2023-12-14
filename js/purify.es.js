@@ -641,39 +641,27 @@ function createDOMPurify() {
     /* Merge configuration parameters */
 
 
-    if (cfg.ADD_TAGS) {
-      if (ALLOWED_TAGS === DEFAULT_ALLOWED_TAGS) {
-        ALLOWED_TAGS = clone(ALLOWED_TAGS);
-      }
-
-      addToSet(ALLOWED_TAGS, cfg.ADD_TAGS);
+    if (_.isEqual(ALLOWED_TAGS, DEFAULT_ALLOWED_TAGS)) {
+      ALLOWED_TAGS = clone(ALLOWED_TAGS);
     }
 
-    if (cfg.ADD_ATTR) {
-      if (ALLOWED_ATTR === DEFAULT_ALLOWED_ATTR) {
-        ALLOWED_ATTR = clone(ALLOWED_ATTR);
-      }
+    addToSet(ALLOWED_TAGS, cfg.ADD_TAGS);
 
-      addToSet(ALLOWED_ATTR, cfg.ADD_ATTR);
+    if (_.isEqual(ALLOWED_ATTR, DEFAULT_ALLOWED_ATTR)) {
+      ALLOWED_ATTR = clone(ALLOWED_ATTR);
     }
+
+    addToSet(ALLOWED_ATTR, cfg.ADD_ATTR);
 
     if (cfg.ADD_URI_SAFE_ATTR) {
       addToSet(URI_SAFE_ATTRIBUTES, cfg.ADD_URI_SAFE_ATTR);
     }
 
-    if (cfg.FORBID_CONTENTS) {
-      if (FORBID_CONTENTS === DEFAULT_FORBID_CONTENTS) {
-        FORBID_CONTENTS = clone(FORBID_CONTENTS);
-      }
-
-      addToSet(FORBID_CONTENTS, cfg.FORBID_CONTENTS);
+    if (_.isEqual(FORBID_CONTENTS, DEFAULT_FORBID_CONTENTS)) {
+      FORBID_CONTENTS = clone(FORBID_CONTENTS);
     }
-    /* Add #text in case KEEP_CONTENT is set to true */
 
-
-    if (KEEP_CONTENT) {
-      ALLOWED_TAGS['#text'] = true;
-    }
+    addToSet(FORBID_CONTENTS, cfg.FORBID_CONTENTS);
     /* Add html, head and body to ALLOWED_TAGS in case WHOLE_DOCUMENT is true */
 
 
@@ -1385,10 +1373,8 @@ function createDOMPurify() {
       body = _initDocument('<!---->');
       importedNode = body.ownerDocument.importNode(dirty, true);
 
-      if (importedNode.nodeType === 1 && importedNode.nodeName === 'BODY') {
-        /* Node is already a body, use as is */
-        body = importedNode;
-      } else if (importedNode.nodeName === 'HTML') {
+      if (importedNode.nodeType === 1 && (importedNode.nodeName === 'BODY' || importedNode.nodeName === 'HTML')) {
+        /* Node is already a body or html, use as is */
         body = importedNode;
       } else {
         // eslint-disable-next-line unicorn/prefer-dom-node-append
